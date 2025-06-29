@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Сторінку не знайдено</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            flex-direction: column;
+        }
+        .error-container {
+            background-color: var(--container-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px var(--card-shadow);
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 8em;
+            margin: 0;
+            color: var(--main-card-gradient-end);
+        }
+        h2 {
+            font-size: 2em;
+            margin-top: -20px;
+            color: var(--header-text-color);
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #5a0eac; /* Темніший відтінок кнопки при наведенні */
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>404</h1>
+        <h2>На жаль, сторінку не знайдено.</h2>
+        <p>Можливо, ви ввели неправильну адресу або сторінка була видалена.</p>
+        <a href="/">Повернутися на головну</a>
+    </div>
+</body>
+</html>

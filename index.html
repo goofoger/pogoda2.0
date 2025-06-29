@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infomase - Прогноз погоди</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <i class="fas fa-cloud-sun-rain fa-2x" style="color: var(--sidebar-active-color); margin-right: 10px;"></i>
+                <span>Infomase</span>
+            </div>
+            <nav class="navigation">
+                <h3>GENERAL</h3>
+                <ul>
+                    <li class="active" id="dashboard-nav-link">
+                        <i class="fas fa-chart-line"></i>
+                        <a href="#" data-section="dashboard">Dashboard</a>
+                    </li>
+                    <li id="map-nav-link">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <a href="#" data-section="map">Map</a>
+                    </li>
+                    <li id="saved-locations-nav-link">
+                        <i class="fas fa-save"></i>
+                        <a href="#" data-section="saved-locations">Saved Locations</a>
+                    </li>
+                </ul>
+                <h3>ACCOUNT</h3>
+                <div class="profile-section">
+                    <div id="auth-buttons" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+                        <a href="/login.html" class="action-btn-small" id="login-btn">Увійти</a>
+                    </div>
+                    <div id="profile-info" style="display: none; flex-direction: column; align-items: center; gap: 10px; width: 100%;">
+                        <span id="username-display" style="font-weight: 600; color: var(--sidebar-active-color);"></span>
+                        <button class="action-btn-small logout-btn" id="logout-btn">Вийти</button>
+                    </div>
+                </div>
+            </nav>
+            <div class="theme-switcher">
+                <i class="fas fa-moon" id="theme-toggle-moon"></i>
+                <i class="fas fa-sun" id="theme-toggle-sun" style="display: none;"></i>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+             <header class="header">
+                <div class="search-bar">
+                    <input type="text" id="location-search" placeholder="Пошук міста...">
+                    <button id="add-location-btn" class="add-location-btn" style="display: none;"><i class="fas fa-plus"></i></button>
+                    <button id="save-location-btn" class="action-btn-small"><i class="fas fa-bookmark"></i> Зберегти</button>
+                    <button id="remove-location-btn" class="action-btn-small delete-button"><i class="fas fa-trash-alt"></i> Видалити</button>
+                </div>
+                </header>
+            </header>
+
+            <section id="dashboard-section" class="active-section">
+                <div class="current-weather">
+                    <div class="weather-card main-card">
+                        <div class="card-header">
+                            <h2 id="current-location">Kyiv</h2>
+                            <span id="current-time"></span>
+                        </div>
+                        <div class="weather-details">
+                            <div class="temperature">
+                                <img id="current-weather-icon" src="" alt="Weather Icon">
+                                <span id="current-temp"></span>
+                                <span class="celsius">°C</span>
+                            </div>
+                            <p id="current-condition"></p>
+                        </div>
+                        <div class="additional-info">
+                            <div>Feels like: <span id="current-feels-like"></span>°C</div>
+                            <div>Pressure: <span id="current-pressure"></span>mb</div>
+                            <div>Wind: <span id="current-wind"></span>km/h</div>
+                            <div>Visibility: <span id="current-visibility"></span>km</div>
+                            <div>Dew Point: <span id="current-dew-point"></span>°C</div>
+                            <div>Humidity: <span id="current-humidity"></span>%</div>
+                        </div>
+                        <button class="save-location-btn" id="save-location-btn">
+                            <i class="fas fa-bookmark"></i>
+                            Зберегти місце
+                        </button>
+                    </div>
+
+                    <div class="weather-card">
+                        <div class="card-header">
+                            <h2>Прогноз на 24 години</h2>
+                            <span class="date-info">
+                                <i class="fas fa-calendar-alt"></i>
+                                <h2 class="date-info"></h2>
+                            </span>
+                        </div>
+                        <div class="forecast-hourly" id="forecast-hourly-container">
+                            </div>
+                    </div>
+                </div>
+
+                <div class="forecast-daily">
+                    <div class="weather-card">
+                        <div class="card-header">
+                            <h2>Денний прогноз</h2>
+                        </div>
+                        <div class="forecast-cards" id="forecast-cards-container">
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="map-section" style="display: none;">
+                <div class="weather-card" style="padding: 20px;">
+                    <h2 style="color: var(--header-text-color); margin-bottom: 20px;">Карта</h2>
+                    <div style="height: 400px; width: 100%; border-radius: 10px; overflow: hidden;">
+                        <iframe
+                            width="100%"
+                            height="100%"
+                            frameborder="0"
+                            scrolling="no"
+                            marginheight="0"
+                            marginwidth="0"
+                            src="https://www.openstreetmap.org/export/embed.html?bbox=30.2974%2C50.3168%2C30.6548%2C50.5828&amp;layer=mapnik&amp;marker=50.4501%2C30.5234"
+                            style="border: 1px solid var(--sidebar-border); border-radius: 10px;">
+                        </iframe>
+                    </div>
+                    <small style="display: block; text-align: center; margin-top: 10px;">
+                        <a id="osm-map-link" href="https://www.openstreetmap.org/#map=12/50.4501/30.5234" target="_blank" rel="noopener noreferrer" style="color: var(--sidebar-active-color); text-decoration: none;">Переглянути більшу карту на OpenStreetMap</a>
+                    </small>
+                </div>
+            </section>
+
+            <section id="saved-locations-section" style="display: none;">
+                <div class="weather-card" style="padding: 20px;">
+                    <h2 style="color: var(--header-text-color); margin-bottom: 20px;">Збережені місця</h2>
+                    <ul id="saved-locations-list" style="list-style: none; padding: 0;">
+                        </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

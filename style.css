@@ -1,0 +1,1013 @@
+:root {
+    /* Кольори для світлої теми */
+    --bg-color: #f0f2f5;
+    --container-bg: #ffffff;
+    --sidebar-bg: #ffffff;
+    --header-bg: #ffffff;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --header-text-color: #2c3e50;
+    --sidebar-text-color: #6c7a89;
+    --sidebar-link-color: #555;
+    --sidebar-active-color: #6a11cb; /* Фіолетовий */
+    --sidebar-hover-bg: #f5f5f5;
+    --sidebar-border: #eee;
+    --input-border: #ddd;
+    --search-bg: #f9f9f9;
+    --search-text-color: #333;
+    --search-placeholder-color: #888;
+    --card-shadow: rgba(0, 0, 0, 0.05);
+    --main-card-gradient-start: #8a2be2; /* BlueViolet */
+    --main-card-gradient-end: #4b0082; /* Indigo */
+    --button-bg: #6a11cb; /* Фіолетовий */
+    --button-text: #ffffff;
+    --delete-button-bg: #dc3545; /* Червоний */
+    --hourly-item-bg: #f8f8f8;
+    --hourly-item-border: #eee;
+    --day-card-bg: #f8f8f8;
+    --day-card-border: #eee;
+    --delete-icon-color: #999; /* Колір іконки видалення */
+    --secondary-text-color: #6c7a89; /* Додано для інформаційних повідомлень */
+    --error-color: #dc3545; /* Додано для повідомлень про помилки */
+}
+
+.dark-theme {
+    /* Кольори для темної теми */
+    --bg-color: #2c3e50; /* Темно-сірий */
+    --container-bg: #34495e; /* Трохи світліше */
+    --sidebar-bg: #34495e;
+    --header-bg: #34495e;
+    --card-bg: #4a6572; /* Темно-синьо-сірий */
+    --text-color: #ecf0f1; /* Світло-сірий */
+    --header-text-color: #ecf0f1;
+    --sidebar-text-color: #bdc3c7;
+    --sidebar-link-color: #ecf0f1;
+    --sidebar-active-color: #bb86fc; /* Світло-фіолетовий */
+    --sidebar-hover-bg: #2b3b4a;
+    --sidebar-border: #444;
+    --input-border: #555;
+    --search-bg: #3b5062;
+    --search-text-color: #ecf0f1;
+    --search-placeholder-color: #999;
+    --card-shadow: rgba(0, 0, 0, 0.2);
+    --main-card-gradient-start: #6200ea; /* Deep Purple */
+    --main-card-gradient-end: #bb86fc; /* Light Purple */
+    --button-bg: #bb86fc;
+    --button-text: #ffffff;
+    --delete-button-bg: #cf6679; /* Червоний (трохи світліше для темної теми) */
+    --hourly-item-bg: #3b5062;
+    --hourly-item-border: #555;
+    --day-card-bg: #3b5062;
+    --day-card-border: #555;
+    --delete-icon-color: #bbb; /* Колір іконки видалення для темної теми */
+    --secondary-text-color: #bdc3c7; /* Додано для інформаційних повідомлень */
+    --error-color: #cf6679; /* Додано для повідомлень про помилки */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Змінено на flex-start для адаптивності, щоб контент починався зверху */
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Додано перехід для body */
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    background-color: var(--container-bg);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px var(--card-shadow);
+    overflow: hidden;
+    margin: 20px;
+    flex-direction: row;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px; /* Трохи збільшено ширину сайдбару */
+    background-color: var(--sidebar-bg);
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--sidebar-border);
+    box-shadow: 2px 0 5px var(--card-shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px; /* Збільшено відступ */
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--header-text-color);
+    padding: 0 20px;
+}
+
+.sidebar .navigation {
+    flex-grow: 1; /* Дозволяє навігації займати доступний простір */
+}
+
+.sidebar .navigation h3 {
+    color: var(--sidebar-text-color);
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 20px 0 10px 30px;
+    letter-spacing: 1px;
+}
+
+.sidebar .navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .navigation ul li {
+    padding: 12px 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar .navigation ul li:hover {
+    background-color: var(--sidebar-hover-bg);
+}
+
+.sidebar .navigation ul li.active {
+    background-color: var(--sidebar-active-color);
+    color: white;
+    border-radius: 0 25px 25px 0;
+    margin-right: 10px;
+    position: relative;
+}
+
+.sidebar .navigation ul li.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background-color: white; /* Або інший контрастний колір */
+    border-radius: 0 3px 3px 0;
+}
+
+
+.sidebar .navigation ul li a {
+    color: var(--sidebar-link-color);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 15px;
+    flex-grow: 1;
+    transition: color 0.2s ease;
+}
+
+.sidebar .navigation ul li.active a,
+.sidebar .navigation ul li.active i {
+    color: white;
+}
+
+.sidebar .navigation ul li i {
+    font-size: 18px;
+    color: var(--sidebar-text-color);
+    transition: color 0.2s ease;
+}
+
+/* Profile Section */
+.profile-section {
+    padding: 20px 30px;
+    margin-top: 20px;
+    border-top: 1px solid var(--sidebar-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Збільшено відступ між елементами */
+}
+
+#auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Відступ між кнопками */
+    width: 100%;
+}
+
+#profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+#username-display {
+    font-weight: 600;
+    color: var(--sidebar-active-color); /* Колір для імені користувача */
+    text-align: center;
+    word-break: break-word; /* Дозволяє переносити довгі імена */
+}
+
+
+/* Theme Switcher */
+.theme-switcher {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px;
+    border-top: 1px solid var(--sidebar-border);
+}
+
+.theme-switcher i {
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--sidebar-link-color);
+    transition: color 0.3s ease;
+}
+.theme-switcher i:hover {
+    color: var(--sidebar-active-color);
+}
+
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Збільшено відступ між секціями */
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--header-bg);
+    padding: 20px 25px; /* Збільшено внутрішні відступи */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px var(--card-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--search-bg);
+    border-radius: 8px;
+    padding: 8px 15px; /* Збільшено внутрішні відступи */
+    border: 1px solid var(--input-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    flex-grow: 1; /* Дозволяє займати доступний простір */
+    max-width: 500px; /* Обмеження ширини */
+}
+
+.search-bar i {
+    color: var(--search-placeholder-color);
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    color: var(--search-text-color);
+    width: 100%; /* Займає всю доступну ширину */
+    padding: 5px 0;
+}
+
+.search-bar input::placeholder {
+    color: var(--search-placeholder-color);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-profile i {
+    font-size: 22px;
+    color: var(--sidebar-link-color);
+    cursor: pointer;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--sidebar-active-color); /* Невелика рамка */
+}
+
+/* Weather Cards */
+.current-weather {
+    display: flex;
+    gap: 25px; /* Збільшено відступ між картками */
+    flex-wrap: wrap; /* Дозволяє карткам переноситися на новий рядок на менших екранах */
+}
+
+.weather-card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 2px 15px var(--card-shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-card.main-card {
+    flex: 2 1 550px; /* Основна картка займатиме більше місця */
+    background: linear-gradient(135deg, var(--main-card-gradient-start), var(--main-card-gradient-end));
+    color: white;
+    position: relative; /* Для позиціонування кнопки збереження */
+    min-height: 280px; /* Мінімальна висота для консистентності */
+    justify-content: space-between; /* Розподіл вмісту по вертикалі */
+}
+
+.weather-card.main-card .card-header h2,
+.weather-card.main-card .card-header span,
+.weather-card.main-card .weather-details p,
+.weather-card.main-card .additional-info div {
+    color: white;
+}
+
+.weather-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.weather-card .card-header h2 {
+    font-size: 24px;
+    color: var(--header-text-color);
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.weather-card.main-card .card-header h2 {
+    font-size: 32px; /* Більший розмір для основної картки */
+    font-weight: 700;
+}
+
+.weather-card .card-header span {
+    font-size: 16px;
+    color: var(--sidebar-text-color);
+    transition: color 0.3s ease;
+}
+
+.weather-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.weather-details .temperature {
+    display: flex;
+    align-items: flex-start; /* Вирівнювання градусів по верхньому краю */
+    font-size: 60px; /* Збільшений розмір температури */
+    font-weight: 700;
+    margin-right: 20px;
+    color: var(--text-color);
+    position: relative;
+    line-height: 1; /* Забезпечення правильної висоти рядка */
+}
+
+.weather-card.main-card .weather-details .temperature {
+    color: white;
+}
+
+
+.weather-details .temperature img {
+    width: 80px; /* Збільшений розмір іконки */
+    height: 80px;
+    margin-right: 10px;
+}
+
+.weather-details .celsius {
+    font-size: 30px; /* Менший розмір для знаку градуса */
+    font-weight: 500;
+    align-self: flex-start; /* Вирівнювання знаку градуса по верхньому краю */
+    margin-top: 5px; /* Невеликий відступ, щоб підняти */
+}
+
+.weather-details p {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--sidebar-text-color);
+}
+
+.weather-card.main-card .weather-details p {
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+}
+
+.additional-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Дві колонки */
+    gap: 10px 20px; /* Відступи між елементами */
+    font-size: 15px;
+    color: var(--text-color);
+}
+
+.additional-info div {
+    display: flex;
+    justify-content: space-between; /* Розподіл тексту та значення */
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1); /* Легка розділяюча лінія */
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+.dark-theme .additional-info div {
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.additional-info div:last-child,
+.additional-info div:nth-last-child(2) {
+    border-bottom: none; /* Прибрати лінію для останнього рядка */
+}
+
+.additional-info span {
+    font-weight: 600;
+    color: var(--header-text-color);
+}
+.weather-card.main-card .additional-info span {
+    color: white;
+}
+
+/* Save Location Button */
+.save-location-btn {
+    background-color: rgba(255, 255, 255, 0.2); /* Напівпрозорий білий */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute; /* Позиціонування всередині main-card */
+    bottom: 25px;
+    right: 25px;
+    transition: background-color 0.3s ease;
+}
+.save-location-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.save-location-btn i {
+    font-size: 18px;
+}
+
+
+/* Hourly Forecast */
+.weather-card:not(.main-card) {
+    flex: 1 1 400px; /* Інші картки займатимуть менше місця, але з можливістю розширення */
+}
+.forecast-hourly {
+    display: flex;
+    overflow-x: auto; /* Дозволяє горизонтальну прокрутку */
+    gap: 15px;
+    padding-bottom: 10px; /* Для прокрутки */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--sidebar-active-color) var(--sidebar-hover-bg); /* Firefox */
+}
+/* Стилі для вебкіт-браузерів (Chrome, Safari) */
+.forecast-hourly::-webkit-scrollbar {
+    height: 8px; /* Висота скролбару */
+}
+.forecast-hourly::-webkit-scrollbar-track {
+    background: var(--sidebar-hover-bg); /* Фон скролбару */
+    border-radius: 10px;
+}
+.forecast-hourly::-webkit-scrollbar-thumb {
+    background-color: var(--sidebar-active-color); /* Колір повзунка */
+    border-radius: 10px;
+    border: 2px solid var(--sidebar-hover-bg);
+}
+.hourly-item {
+    flex-shrink: 0; /* Забороняє стискатися */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px solid var(--hourly-item-border);
+    border-radius: 10px;
+    background-color: var(--hourly-item-bg);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    min-width: 80px; /* Мінімальна ширина для елементів */
+}
+.hourly-item span {
+    font-size: 14px;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+.hourly-item img {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 5px;
+}
+/* Daily Forecast */
+.forecast-daily .weather-card {
+    width: 100%; /* Займає всю ширину */
+}
+.forecast-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Адаптивна сітка */
+    gap: 15px; /* Відступ між картками */
+    margin-top: 15px;
+}
+.day-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 10px;
+    border: 1px solid var(--day-card-border);
+    border-radius: 10px;
+    background-color: var(--day-card-bg);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.day-card span {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 8px;
+}
+.day-card img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
+}
+.day-card .temp-range {
+    font-size: 14px;
+    color: var(--sidebar-text-color);
+}
+.day-card .temp-range .max-temp {
+    font-weight: 600;
+    color: var(--header-text-color);
+}
+/* Buttons (General style for small action buttons) */
+.action-btn-small {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none; /* Для посилань, що виглядають як кнопки */
+    display: inline-flex; /* Для вирівнювання тексту та іконки */
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%; /* Займає всю доступну ширину */
+    box-sizing: border-box; /* Враховує padding та border у ширині */
+}
+.action-btn-small:hover {
+    background-color: color-mix(in srgb, var(--button-bg) 85%, black);
+    transform: translateY(-1px);
+}
+/* Style for logout button */
+.action-btn-small.logout-btn {
+    background-color: var(--delete-button-bg); /* Red color for logout button */
+}
+.action-btn-small.logout-btn:hover {
+    background-color: color-mix(in srgb, var(--delete-button-bg) 85%, black);
+}
+/* Authentication pages styling (from login.html and register.html) */
+.auth-container {
+    background-color: var(--container-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px var(--card-shadow);
+    text-align: center;
+    width: 380px; /* Трохи збільшено ширину для кращого вигляду */
+    max-width: 90%;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.auth-container h2 {
+    color: var(--header-text-color);
+    margin-bottom: 25px;
+    font-size: 28px;
+    transition: color 0.3s ease;
+}
+.auth-container .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.auth-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--sidebar-link-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+/* Input fields */
+.auth-container input[type="text"],
+.auth-container input[type="email"],
+.auth-container input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--search-bg);
+    box-sizing: border-box; /* Важливо для правильної ширини */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.auth-container input[type="text"]:focus,
+.auth-container input[type="email"]:focus,
+.auth-container input[type="password"]:focus {
+    border-color: var(--sidebar-active-color);
+    outline: none;
+}
+
+.auth-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-container button:hover {
+    background-color: color-mix(in srgb, var(--button-bg) 85%, black);
+    transform: translateY(-1px);
+}
+
+.auth-container .message {
+    margin-top: 20px;
+    font-size: 16px;
+    color: var(--text-color); /* Колір за замовчуванням */
+}
+
+.auth-container .message.error {
+    color: var(--error-color); /* Червоний для помилок */
+}
+
+.auth-container .message.success {
+    color: #28a745; /* Зелений для успіху */
+}
+
+.auth-container p {
+    margin-top: 20px;
+    color: var(--sidebar-link-color);
+    font-size: 15px;
+}
+
+.auth-container p a {
+    color: var(--sidebar-active-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.auth-container p a:hover {
+    text-decoration: underline;
+}
+
+/* Error Message (global style for displaying errors) */
+#error-message {
+    background-color: var(--error-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 15px;
+    text-align: center;
+    opacity: 0; /* Приховано за замовчуванням */
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Saved Locations Section */
+#saved-locations-section {
+    display: none; /* Приховано за замовчуванням, показується через JS */
+}
+
+#saved-locations-section .weather-card {
+    padding: 20px;
+}
+
+#saved-locations-section h2 {
+    color: var(--header-text-color);
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+#saved-locations-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.saved-location-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--hourly-item-bg); /* Використовуємо той же фон, що для hourly items */
+    border: 1px solid var(--hourly-item-border);
+    border-radius: 10px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.saved-location-item:last-child {
+    margin-bottom: 0;
+}
+
+.saved-location-item span {
+    font-size: 16px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.saved-location-item .delete-btn {
+    background: none;
+    border: none;
+    color: var(--delete-icon-color);
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.saved-location-item .delete-btn:hover {
+    color: var(--error-color);
+}
+
+#no-saved-locations-message {
+    color: var(--secondary-text-color);
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background-color: var(--hourly-item-bg);
+    border-radius: 10px;
+    border: 1px solid var(--hourly-item-border);
+}
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column; /* Змінюємо напрямок на колонку для менших екранів */
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 20px 0;
+        border-right: none;
+        border-bottom: 1px solid var(--sidebar-border);
+        box-shadow: 0 2px 5px var(--card-shadow);
+    }
+
+    .sidebar .logo {
+        margin-bottom: 20px;
+    }
+
+    .sidebar .navigation ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .sidebar .navigation ul li {
+        padding: 10px 15px;
+        border-radius: 8px; /* Додаємо радіус для елементів навігації */
+        margin-right: 0; /* Прибираємо відступ */
+    }
+
+    .sidebar .navigation ul li.active {
+        border-radius: 8px; /* Застосовуємо радіус до активного елемента */
+    }
+
+    .sidebar .navigation ul li.active::before {
+        content: none; /* Прибираємо вертикальну лінію */
+    }
+
+    .sidebar .navigation h3 {
+        text-align: center;
+        margin: 15px 0 10px;
+    }
+
+    .profile-section, .theme-switcher {
+        padding: 15px 20px;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap; /* Дозволяє перенос кнопок */
+        gap: 15px;
+    }
+    #auth-buttons, #profile-info {
+        flex-direction: row; /* Розміщення кнопок в ряд */
+        gap: 10px;
+    }
+    #username-display {
+        margin-right: 15px;
+    }
+    .action-btn-small {
+        width: auto; /* Дозволяє кнопкам адаптувати ширину до контенту */
+        max-width: 150px; /* Обмеження ширини */
+    }
+
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .search-bar {
+        width: 100%;
+        max-width: none;
+    }
+
+    .user-profile {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .current-weather {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .weather-card.main-card {
+        flex: auto; /* Дозволяє займати всю доступну ширину */
+    }
+    .save-location-btn {
+        position: static; /* Змінюємо позиціонування на статичне */
+        margin-top: 20px; /* Додаємо відступ зверху */
+        width: 100%; /* Займає всю ширину */
+    }
+
+    .weather-details .temperature {
+        font-size: 50px;
+    }
+    .weather-details .temperature .celsius {
+        font-size: 25px;
+    }
+    .weather-details .temperature img {
+        width: 70px;
+        height: 70px;
+    }
+    .weather-details p {
+        font-size: 18px;
+    }
+    .weather-card.main-card .weather-details p {
+        font-size: 20px;
+    }
+
+    .forecast-hourly {
+        gap: 10px;
+    }
+    .hourly-item {
+        min-width: 70px;
+    }
+    .hourly-item span {
+        font-size: 13px;
+    }
+    .hourly-item img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .forecast-cards {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 10px;
+    }
+    .day-card span {
+        font-size: 14px;
+    }
+    .day-card img {
+        width: 45px;
+        height: 45px;
+    }
+    .day-card .temp-range {
+        font-size: 13px;
+    }
+
+    /* Auth pages */
+    .auth-container {
+        width: 95%; /* Більша ширина на мобільних */
+        padding: 25px;
+    }
+    .auth-container h2 {
+        font-size: 24px;
+    }
+    .auth-container input[type="text"],
+    .auth-container input[type="email"],
+    .auth-container input[type="password"] {
+        font-size: 15px;
+        padding: 10px 12px;
+    }
+    .auth-container button {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar .navigation ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    .sidebar .navigation ul li {
+        width: calc(100% - 20px); /* Займає майже всю ширину */
+        text-align: center;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    .sidebar .navigation ul li.active {
+        margin-right: 0;
+    }
+
+    .profile-section, .theme-switcher {
+        flex-direction: column;
+        gap: 10px;
+    }
+    #auth-buttons, #profile-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+    #username-display {
+        margin-right: 0;
+    }
+    .action-btn-small {
+        width: 100%; /* Займає повну ширину */
+        max-width: none; /* Прибрати обмеження ширини */
+    }
+
+    .weather-details .temperature {
+        font-size: 40px;
+    }
+    .weather-details .temperature .celsius {
+        font-size: 20px;
+    }
+    .weather-details .temperature img {
+        width: 60px;
+        height: 60px;
+    }
+    .weather-details p {
+        font-size: 16px;
+    }
+    .weather-card.main-card .weather-details p {
+        font-size: 18px;
+    }
+
+    .additional-info {
+        font-size: 14px;
+    }
+
+    .forecast-cards {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Ще менші мінімальні ширини */
+    }
+
+    .hourly-item {
+        min-width: 65px;
+    }
+    .hourly-item span {
+        font-size: 12px;
+    }
+    .hourly-item img {
+        width: 35px;
+        height: 35px;
+    }
+}
